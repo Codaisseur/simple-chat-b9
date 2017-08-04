@@ -1,0 +1,14 @@
+.MessageHeader {
+  font-size: 80%;
+  padding: 0.8rem 1rem 0.5rem;
+  border-top: 1px solid #ececec;
+  border-bottom: 1px solid #ececec;
+}
+
+.MessageHeader .author {
+  font-weight: bold;
+}
+
+.MessageHeader .timestamp {
+  color: #c3c3c3;
+}

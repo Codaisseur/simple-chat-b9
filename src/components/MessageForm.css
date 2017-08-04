@@ -1,0 +1,13 @@
+.MessageForm {
+  align-self: flex-end;
+  width: 100%;
+  bottom: 0;
+  background-color: #f9f9f9;
+  box-shadow: 1px -1px 5px rgba(0,0,0,0.1);
+  z-index: 99;
+}
+
+.MessageForm form {
+  width: 100%;
+  padding: 2rem;
+}
