@@ -10,7 +10,9 @@ import {
 export default (state = [], { type, payload }) => {
   switch (type) {
     case MESSAGES_FETCHED :
-      return [ ...payload ]
+      const newIds = payload.map((message) => (message._id))
+      return state.filter((old) => (!newIds.includes(old._id)))
+        .concat([ ...payload ])
 
     case MESSAGE_CREATED :
       return state.concat({ ...payload })

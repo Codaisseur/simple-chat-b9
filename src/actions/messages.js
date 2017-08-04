@@ -19,7 +19,14 @@ export const sendMessage = (text) => {
 
 export const fetchMessages = () => {
   return (dispatch) => {
-    messages.find()
+    messages.find({
+      query: {
+        $limit: 10,
+        $sort: {
+          createdAt: -1
+        }
+      }
+    })
       .then((response) => {
         dispatch({
           type: MESSAGES_FETCHED,
@@ -32,34 +39,34 @@ export const fetchMessages = () => {
 export const subscribe = () => {
   return (dispatch, getState) => {
     const { subscriptions } = getState()
-    if (subscriptions.includes('messsages')) return // already subscribed!
+    if (subscriptions.includes('messages')) return // already subscribed!
 
-    messages.on('created', (recipe) => { dispatch(createdRecipe(recipe)) })
-    messages.on('updated', (recipe) => { dispatch(updatedRecipe(recipe)) })
-    messages.on('patched', (recipe) => { dispatch(updatedRecipe(recipe)) })
-    messages.on('removed', (recipe) => { dispatch(removedRecipe(recipe)) })
+    messages.on('created', (message) => { dispatch(createdMessage(message)) })
+    messages.on('updated', (message) => { dispatch(updatedMessage(message)) })
+    messages.on('patched', (message) => { dispatch(updatedMessage(message)) })
+    messages.on('removed', (message) => { dispatch(removedMessage(message)) })
 
     dispatch({ type: SUBSCRIBED_TO_MESSAGES_SERVICE })
   }
 }
 
-const createdRecipe = (recipe) => {
+const createdMessage = (message) => {
   return {
     type: MESSAGE_CREATED,
-    payload: recipe
+    payload: message
   }
 }
 
-const updatedRecipe = (recipe) => {
+const updatedMessage = (message) => {
   return {
     type: MESSAGE_UPDATED,
-    payload: recipe
+    payload: message
   }
 }
 
-const removedRecipe = (recipe) => {
+const removedMessage = (message) => {
   return {
     type: MESSAGE_REMOVED,
-    payload: recipe
+    payload: message
   }
 }
